@@ -59,6 +59,9 @@ const Header = () => {
           <Link href="/about">
             <li className="hidden md:inline  hover:underline">About</li>
           </Link>
+          <Link href="/create-listing">
+            <li className="hidden md:inline  hover:underline">Create List</li>
+          </Link>
           <SignedIn>
             <UserButton />
           </SignedIn>

@@ -18,7 +18,7 @@ export default function ListingItem({ listing }) {
             {listing.name}
           </p>
           <div className="flex items-center gap-1">
-            <MdLocationOn className="h-4 w-4 text-green-700" />
+            <MdLocationOn className="h-4 w-4 text-blue-700" />
             <p className="text-sm text-gray-600 truncate w-full">
               {listing.address}
             </p>
