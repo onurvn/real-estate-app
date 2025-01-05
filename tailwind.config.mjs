@@ -10,7 +10,7 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        bgheader: "#181A20",
+        bgheader: "#23272f",
       },
     },
   },
