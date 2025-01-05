@@ -1,9 +1,34 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { FaSearch } from "react-icons/fa";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
+import { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+
 const Header = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(searchParams);
+    const searchTermFromUrl = urlParams.get("searchTerm");
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [searchParams]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(searchParams);
+    urlParams.set("searchTerm", searchTerm);
+    const searchQuery = urlParams.toString();
+    router.push(`/search?${searchQuery}`);
+  };
+
   return (
     <header className="bg-bgheader shadow-md p-2">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
@@ -12,11 +37,16 @@ const Header = () => {
             <span className="hover:text-gray-400">Real Estate</span>
           </h1>
         </Link>
-        <form className="bg-white p-1.5 rounded-lg flex items-center">
+        <form
+          className="bg-white p-1.5 rounded-lg flex items-center"
+          onSubmit={handleSubmit}
+        >
           <input
             type="text"
             placeholder="Search..."
             className="text-black focus:outline-none md:w-72"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button>
             <FaSearch className="text-slate-600" />
